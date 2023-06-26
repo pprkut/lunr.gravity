@@ -1,4 +1,10 @@
 {
+  "name": "lunr/gravity",
+  "description": "Lunr.Gravity is a database library that doesn't limit functionality to the least common denominator.",
+  "keywords": [ "cli", "getopt" ],
+  "homepage": "https://github.com/lunr-php/lunr.gravity",
+  "type": "library",
+  "license": "MIT",
   "require": {
     "psr/log": "~1.1.0",
     "php": ">=7.4",
