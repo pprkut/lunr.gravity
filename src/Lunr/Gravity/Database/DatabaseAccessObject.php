@@ -10,7 +10,6 @@
 
 namespace Lunr\Gravity\Database;
 
-use Lunr\Gravity\DataAccessObjectInterface;
 use Lunr\Gravity\Database\Exceptions\DeadlockException;
 use Lunr\Gravity\Database\Exceptions\LockTimeoutException;
 use Lunr\Gravity\Database\Exceptions\QueryException;
@@ -18,7 +17,7 @@ use Lunr\Gravity\Database\Exceptions\QueryException;
 /**
  * This class provides a way to access databases.
  */
-abstract class DatabaseAccessObject implements DataAccessObjectInterface
+abstract class DatabaseAccessObject
 {
 
     /**
