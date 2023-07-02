@@ -10,7 +10,7 @@
 
 namespace Lunr\Gravity\MySQL\Tests;
 
-use \MySQLi_result;
+use MySQLi_result;
 
 /**
  * This class is a wrapper around MySQLi_result.

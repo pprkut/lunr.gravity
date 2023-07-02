@@ -190,25 +190,82 @@ class MySQLCanonicalQueryTest extends LunrBaseTest
     {
         $path = TEST_STATICS . '/Gravity/Database/MySQL/';
 
-        $data_provider['select']                            = [ $path . 'input_select.sql', $path . 'output_select.sql' ];
-        $data_provider['update']                            = [ $path . 'input_update.sql', $path . 'output_update.sql' ];
-        $data_provider['create']                            = [ $path . 'input_create.sql', $path . 'output_create.sql' ];
-        $data_provider['insert single row']                 = [ $path . 'input_insert_single_row.sql', $path . 'output_insert_single_row.sql' ];
-        $data_provider['insert multi-rows']                 = [ $path . 'input_insert_multi_rows.sql', $path . 'output_insert_multi_rows.sql' ];
-        $data_provider['insert different rows']             = [ $path . 'input_insert_different_rows.sql', $path . 'output_insert_different_rows.sql' ];
-        $data_provider['insert no rows']                    = [ $path . 'input_insert_no_rows.sql', $path . 'output_insert_no_rows.sql' ];
-        $data_provider['insert value or null multi-rows']   = [ $path . 'input_insert_value_or_null_multirows.sql', $path . 'output_insert_value_or_null_multirows.sql' ];
-        $data_provider['insert null diff. case multi-rows'] = [ $path . 'input_insert_null_diff_case_multi_rows.sql', $path . 'output_insert_null_diff_case_multi_rows.sql' ];
-        $data_provider['replace single row']                = [ $path . 'input_replace_single_row.sql', $path . 'output_replace_single_row.sql' ];
-        $data_provider['replace multi-rows']                = [ $path . 'input_replace_multi_rows.sql', $path . 'output_replace_multi_rows.sql' ];
-        $data_provider['upserts single row']                = [ $path . 'input_upserts_single_row.sql', $path . 'output_upserts_single_row.sql' ];
-        $data_provider['upserts multi-rows']                = [ $path . 'input_upserts_multi_rows.sql', $path . 'output_upserts_multi_rows.sql' ];
-        $data_provider['upserts function multi-rows']       = [ $path . 'input_upserts_function_multi_rows.sql', $path . 'output_upserts_function_multi_rows.sql' ];
-        $data_provider['maxscalehints']                     = [ $path . 'input_maxscalehints.sql', $path . 'output_maxscalehints.sql' ];
-        $data_provider['cte']                               = [ $path . 'input_cte.sql', $path . 'output_cte.sql' ];
-        $data_provider['unix_lf']                           = [ $path . 'input_unix_lf.sql', $path . 'output_unix_lf.sql' ];
-        $data_provider['win_crlf']                          = [ $path . 'input_win_crlf.sql', $path . 'output_win_crlf.sql' ];
-        $data_provider['mac_cr']                            = [ $path . 'input_mac_cr.sql', $path . 'output_mac_cr.sql' ];
+        $data_provider['select']                            = [
+            $path . 'input_select.sql',
+            $path . 'output_select.sql',
+        ];
+        $data_provider['update']                            = [
+            $path . 'input_update.sql',
+            $path . 'output_update.sql',
+        ];
+        $data_provider['create']                            = [
+            $path . 'input_create.sql',
+            $path . 'output_create.sql',
+        ];
+        $data_provider['insert single row']                 = [
+            $path . 'input_insert_single_row.sql',
+            $path . 'output_insert_single_row.sql',
+        ];
+        $data_provider['insert multi-rows']                 = [
+            $path . 'input_insert_multi_rows.sql',
+            $path . 'output_insert_multi_rows.sql',
+        ];
+        $data_provider['insert different rows']             = [
+            $path . 'input_insert_different_rows.sql',
+            $path . 'output_insert_different_rows.sql',
+        ];
+        $data_provider['insert no rows']                    = [
+            $path . 'input_insert_no_rows.sql',
+            $path . 'output_insert_no_rows.sql',
+        ];
+        $data_provider['insert value or null multi-rows']   = [
+            $path . 'input_insert_value_or_null_multirows.sql',
+            $path . 'output_insert_value_or_null_multirows.sql',
+        ];
+        $data_provider['insert null diff. case multi-rows'] = [
+            $path . 'input_insert_null_diff_case_multi_rows.sql',
+            $path . 'output_insert_null_diff_case_multi_rows.sql',
+        ];
+        $data_provider['replace single row']                = [
+            $path . 'input_replace_single_row.sql',
+            $path . 'output_replace_single_row.sql',
+        ];
+        $data_provider['replace multi-rows']                = [
+            $path . 'input_replace_multi_rows.sql',
+            $path . 'output_replace_multi_rows.sql',
+        ];
+        $data_provider['upserts single row']                = [
+            $path . 'input_upserts_single_row.sql',
+            $path . 'output_upserts_single_row.sql',
+        ];
+        $data_provider['upserts multi-rows']                = [
+            $path . 'input_upserts_multi_rows.sql',
+            $path . 'output_upserts_multi_rows.sql',
+        ];
+        $data_provider['upserts function multi-rows']       = [
+            $path . 'input_upserts_function_multi_rows.sql',
+            $path . 'output_upserts_function_multi_rows.sql',
+        ];
+        $data_provider['maxscalehints']                     = [
+            $path . 'input_maxscalehints.sql',
+            $path . 'output_maxscalehints.sql',
+        ];
+        $data_provider['cte']                               = [
+            $path . 'input_cte.sql',
+            $path . 'output_cte.sql',
+        ];
+        $data_provider['unix_lf']                           = [
+            $path . 'input_unix_lf.sql',
+            $path . 'output_unix_lf.sql',
+        ];
+        $data_provider['win_crlf']                          = [
+            $path . 'input_win_crlf.sql',
+            $path . 'output_win_crlf.sql',
+        ];
+        $data_provider['mac_cr']                            = [
+            $path . 'input_mac_cr.sql',
+            $path . 'output_mac_cr.sql',
+        ];
 
         return $data_provider;
     }
@@ -256,18 +313,50 @@ class MySQLCanonicalQueryTest extends LunrBaseTest
     {
         $path = TEST_STATICS . '/Gravity/Database/MySQL/';
 
-        $data_provider['insert single row']    = [ $path . 'input_collapse_insert_single_row.sql', $path . 'output_collapse_insert_single_row.sql' ];
-        $data_provider['insert multi-rows']    = [ $path . 'input_collapse_insert_multi_rows.sql', $path . 'output_collapse_insert_multi_rows.sql' ];
-        $data_provider['insert no rows']       = [ $path . 'input_collapse_insert_no_rows.sql', $path . 'output_collapse_insert_no_rows.sql' ];
-        $data_provider['insert different row'] = [ $path . 'input_collapse_insert_different_row.sql', $path . 'output_collapse_insert_different_row.sql' ];
-        $data_provider['insert function']      = [ $path . 'input_collapse_insert_function_multi_rows.sql', $path . 'output_collapse_insert_function_multi_rows.sql' ];
-        $data_provider['replace']              = [ $path . 'input_collapse_replace_multi_rows.sql', $path . 'output_collapse_replace_multi_rows.sql' ];
-        $data_provider['upserts single row']   = [ $path . 'input_collapse_upserts_single_row.sql', $path . 'output_collapse_upserts_single_row.sql' ];
-        $data_provider['upserts multi-rows']   = [ $path . 'input_collapse_upserts_multi_rows.sql', $path . 'output_collapse_upserts_multi_rows.sql' ];
-        $data_provider['upserts function']     = [ $path . 'input_collapse_upserts_function.sql', $path . 'output_collapse_upserts_function.sql' ];
-        $data_provider['select']               = [ $path . 'input_collapse_select.sql', $path . 'output_collapse_select.sql' ];
+        $data_provider['insert single row']    = [
+            $path . 'input_collapse_insert_single_row.sql',
+            $path . 'output_collapse_insert_single_row.sql',
+        ];
+        $data_provider['insert multi-rows']    = [
+            $path . 'input_collapse_insert_multi_rows.sql',
+            $path . 'output_collapse_insert_multi_rows.sql',
+        ];
+        $data_provider['insert no rows']       = [
+            $path . 'input_collapse_insert_no_rows.sql',
+            $path . 'output_collapse_insert_no_rows.sql',
+        ];
+        $data_provider['insert different row'] = [
+            $path . 'input_collapse_insert_different_row.sql',
+            $path . 'output_collapse_insert_different_row.sql',
+        ];
+        $data_provider['insert function']      = [
+            $path . 'input_collapse_insert_function_multi_rows.sql',
+            $path . 'output_collapse_insert_function_multi_rows.sql',
+        ];
+        $data_provider['replace']              = [
+            $path . 'input_collapse_replace_multi_rows.sql',
+            $path . 'output_collapse_replace_multi_rows.sql',
+        ];
+        $data_provider['upserts single row']   = [
+            $path . 'input_collapse_upserts_single_row.sql',
+            $path . 'output_collapse_upserts_single_row.sql',
+        ];
+        $data_provider['upserts multi-rows']   = [
+            $path . 'input_collapse_upserts_multi_rows.sql',
+            $path . 'output_collapse_upserts_multi_rows.sql',
+        ];
+        $data_provider['upserts function']     = [
+            $path . 'input_collapse_upserts_function.sql',
+            $path . 'output_collapse_upserts_function.sql',
+        ];
+        $data_provider['select']               = [
+            $path . 'input_collapse_select.sql',
+            $path . 'output_collapse_select.sql',
+        ];
 
         return $data_provider;
     }
 
 }
+
+?>

@@ -192,8 +192,11 @@ class MySQLSimpleDMLQueryBuilderSelectTest extends MySQLSimpleDMLQueryBuilderTes
 
     /**
      * Test union().
+     *
+     * @param string $operators UNION operator
+     *
      * @dataProvider unionOperatorProvider
-     * @covers Lunr\Gravity\MySQL\MySQLSimpleDMLQueryBuilder::union
+     * @covers       Lunr\Gravity\MySQL\MySQLSimpleDMLQueryBuilder::union
      */
     public function testUnion($operators): void
     {

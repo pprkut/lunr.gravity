@@ -145,3 +145,5 @@ class DatabaseDMLQueryBuilderImplodeQueryTest extends DatabaseDMLQueryBuilderTes
     }
 
 }
+
+?>

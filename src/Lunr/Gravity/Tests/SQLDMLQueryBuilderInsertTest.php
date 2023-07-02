@@ -72,3 +72,5 @@ class SQLDMLQueryBuilderInsertTest extends SQLDMLQueryBuilderTest
     }
 
 }
+
+?>

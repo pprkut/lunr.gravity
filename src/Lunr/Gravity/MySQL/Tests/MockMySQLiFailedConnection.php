@@ -10,7 +10,7 @@
 
 namespace Lunr\Gravity\MySQL\Tests;
 
-use \MySQLi;
+use MySQLi;
 
 /**
  * This class is a wrapper around MySQLi for a failed connection.

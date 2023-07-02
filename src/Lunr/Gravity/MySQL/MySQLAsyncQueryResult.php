@@ -10,7 +10,7 @@
 
 namespace Lunr\Gravity\MySQL;
 
-use \MySQLi_Result;
+use MySQLi_Result;
 
 /**
  * MySQL/MariaDB asynchronous query result class.

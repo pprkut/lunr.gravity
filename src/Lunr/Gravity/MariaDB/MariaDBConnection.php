@@ -11,8 +11,8 @@
 namespace Lunr\Gravity\MariaDB;
 
 use Lunr\Gravity\MySQL\MySQLConnection;
-use \Lunr\Core\Configuration;
-use \Psr\Log\LoggerInterface;
+use Lunr\Core\Configuration;
+use Psr\Log\LoggerInterface;
 use mysqli;
 
 /**

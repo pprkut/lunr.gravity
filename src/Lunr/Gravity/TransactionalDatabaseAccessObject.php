@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the DatabaseAccessObject for transactional access.
  *
@@ -56,3 +57,5 @@ abstract class TransactionalDatabaseAccessObject extends DatabaseAccessObject
     }
 
 }
+
+?>

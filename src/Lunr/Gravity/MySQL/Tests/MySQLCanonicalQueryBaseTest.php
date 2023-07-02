@@ -346,3 +346,5 @@ class MySQLCanonicalQueryBaseTest extends MySQLCanonicalQueryTest
     }
 
 }
+
+?>

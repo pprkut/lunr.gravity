@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the DatabaseDMLQueryBuilderQueryPartsWithTest class.
  *
@@ -75,3 +76,5 @@ class SQLDMLQueryBuilderWithTest extends SQLDMLQueryBuilderTest
     }
 
 }
+
+?>

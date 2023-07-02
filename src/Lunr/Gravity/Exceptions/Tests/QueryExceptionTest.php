@@ -18,6 +18,8 @@ use ReflectionClass;
 /**
  * This class contains common setup routines, providers
  * and shared attributes for testing the QueryException class.
+ *
+ * @covers Lunr\Gravity\Exceptions\QueryException
  */
 abstract class QueryExceptionTest extends LunrBaseTest
 {

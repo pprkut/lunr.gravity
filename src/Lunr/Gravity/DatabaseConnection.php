@@ -10,8 +10,8 @@
 
 namespace Lunr\Gravity;
 
-use \Lunr\Core\Configuration;
-use \Psr\Log\LoggerInterface;
+use Lunr\Core\Configuration;
+use Psr\Log\LoggerInterface;
 
 /**
  * This class defines abstract database access.

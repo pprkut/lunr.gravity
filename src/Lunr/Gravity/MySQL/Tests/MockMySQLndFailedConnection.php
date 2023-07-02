@@ -10,7 +10,7 @@
 
 namespace Lunr\Gravity\MySQL\Tests;
 
-use \MySQLndUhConnection;
+use MySQLndUhConnection;
 
 /**
  * This class is a mysqlnd_uh connection handler mocking a successful connection.

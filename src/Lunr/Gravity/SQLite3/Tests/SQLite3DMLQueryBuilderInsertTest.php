@@ -95,3 +95,5 @@ class SQLite3DMLQueryBuilderInsertTest extends SQLite3DMLQueryBuilderTest
     }
 
 }
+
+?>

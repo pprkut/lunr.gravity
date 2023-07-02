@@ -240,3 +240,5 @@ class LunrSQLite3Test extends LunrBaseTest
     }
 
 }
+
+?>
