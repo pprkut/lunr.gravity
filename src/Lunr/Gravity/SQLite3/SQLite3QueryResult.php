@@ -22,19 +22,19 @@ class SQLite3QueryResult implements DatabaseQueryResultInterface
 
     /**
      * The Sqlite3 error code for transaction deadlock.
-     * @var Integer
+     * @var int
      */
     private const LOCK_TIMEOUT_ERR_CODE = 5;
 
     /**
      * The Sqlite3 error code for transaction deadlock.
-     * @var Integer
+     * @var int
      */
     private const DEADLOCK_ERR_CODE = 6;
 
     /**
      * The query string that was executed.
-     * @var String
+     * @var string
      */
     protected $query;
 
@@ -52,25 +52,25 @@ class SQLite3QueryResult implements DatabaseQueryResultInterface
 
     /**
      * Flag whether the query was successful or not.
-     * @var Boolean
+     * @var bool
      */
     protected $success;
 
     /**
      * Flag whether the memory has been freed or not.
-     * @var Boolean
+     * @var bool
      */
     protected $freed;
 
     /**
      * Description of the error.
-     * @var String
+     * @var string
      */
     protected $error_message;
 
     /**
      * Error code.
-     * @var Integer
+     * @var int
      */
     protected $error_number;
 
@@ -82,7 +82,7 @@ class SQLite3QueryResult implements DatabaseQueryResultInterface
 
     /**
      * Number of affected rows.
-     * @var Integer
+     * @var int
      */
     protected $affected_rows;
 
@@ -211,8 +211,8 @@ class SQLite3QueryResult implements DatabaseQueryResultInterface
     /**
      * Get auto incremented ID generated on last insert.
      *
-     * @return mixed $id If the number is greater than maximal int value it's a String
-     *                   otherwise an Integer
+     * @return int $id If the number is greater than maximal int value it's a string
+     *                 otherwise an int
      */
     public function insert_id()
     {

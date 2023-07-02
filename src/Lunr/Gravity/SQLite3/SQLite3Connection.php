@@ -12,6 +12,8 @@ namespace Lunr\Gravity\SQLite3;
 
 use Lunr\Gravity\DatabaseConnection;
 use Lunr\Gravity\Exceptions\ConnectionException;
+use Lunr\Core\Configuration;
+use Psr\Log\LoggerInterface;
 
 /**
  * SQLite database access class.
@@ -21,13 +23,13 @@ class SQLite3Connection extends DatabaseConnection
 
     /**
      * Database to connect to.
-     * @var String
+     * @var string
      */
     protected $db;
 
     /**
      * Instance of the SQLite3 class
-     * @var SQLite3
+     * @var LunrSQLite3
      */
     protected $sqlite3;
 
@@ -189,7 +191,7 @@ class SQLite3Connection extends DatabaseConnection
      *
      * @param string $sql_query The SQL query to run on the database
      *
-     * @return DMLQueryBuilderInterface $result Query Result
+     * @return SQLite3QueryResult $result Query Result
      */
     public function query($sql_query)
     {

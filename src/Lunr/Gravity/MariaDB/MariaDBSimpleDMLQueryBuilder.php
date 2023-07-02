@@ -22,6 +22,12 @@ class MariaDBSimpleDMLQueryBuilder extends MySQLSimpleDMLQueryBuilder
 {
 
     /**
+     * Instance of the MariaDBDMLQueryBuilder class
+     * @var MariaDBDMLQueryBuilder
+     */
+    private $builder;
+
+    /**
      * Constructor.
      *
      * @param MariaDBDMLQueryBuilder $builder Instance of the MySQLDMLQueryBuilder class
@@ -30,6 +36,8 @@ class MariaDBSimpleDMLQueryBuilder extends MySQLSimpleDMLQueryBuilder
     public function __construct($builder, $escaper)
     {
         parent::__construct($builder, $escaper);
+
+        $this->builder = $builder;
     }
 
     /**
@@ -37,6 +45,8 @@ class MariaDBSimpleDMLQueryBuilder extends MySQLSimpleDMLQueryBuilder
      */
     public function __destruct()
     {
+        unset($this->builder);
+
         parent::__destruct();
     }
 
@@ -45,7 +55,7 @@ class MariaDBSimpleDMLQueryBuilder extends MySQLSimpleDMLQueryBuilder
      *
      * @param string $returning Columns to return
      *
-     * @return MySQLDMLQueryBuilder $self Self reference
+     * @return MariaDBDMLQueryBuilder $self Self reference
      */
     public function returning($returning)
     {

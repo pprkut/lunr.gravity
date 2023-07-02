@@ -24,7 +24,7 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
      * Instance of the MySQLDMLQueryBuilder class
      * @var MySQLDMLQueryBuilder
      */
-    protected $builder;
+    private $builder;
 
     /**
      * Instance of the MySQLQueryEscaper class.

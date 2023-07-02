@@ -12,6 +12,9 @@ namespace Lunr\Gravity\MySQL;
 
 use Lunr\Gravity\DatabaseConnection;
 use Lunr\Gravity\Exceptions\ConnectionException;
+use Lunr\Core\Configuration;
+use Psr\Log\LoggerInterface;
+use MySQLi;
 
 /**
  * MySQL/MariaDB database access class.
@@ -21,85 +24,85 @@ class MySQLConnection extends DatabaseConnection
 
     /**
      * Hostname of the database server (read/write access)
-     * @var String
+     * @var string
      */
     protected $rw_host;
 
     /**
      * Hostname of the database server (readonly access)
-     * @var String
+     * @var string
      */
     protected $ro_host;
 
     /**
      * Username of the user used to connect to the database
-     * @var String
+     * @var string
      */
     protected $user;
 
     /**
      * Password of the user used to connect to the database
-     * @var String
+     * @var string
      */
     protected $pwd;
 
     /**
      * Database to connect to.
-     * @var String
+     * @var string
      */
     protected $db;
 
     /**
      * Port to connect to the database server.
-     * @var Integer
+     * @var int
      */
     protected $port;
 
     /**
      * Path to the UNIX socket for localhost connection
-     * @var String
+     * @var string
      */
     protected $socket;
 
     /**
-     * Instance of the Mysqli class
-     * @var mysqli
+     * Instance of the MySQLi class
+     * @var MySQLi
      */
     protected $mysqli;
 
     /**
      * SQL hint to send along with the query.
-     * @var String
+     * @var string
      */
     protected $query_hint;
 
     /**
      * The path name to the key file.
-     * @var String
+     * @var string
      */
     protected $ssl_key;
 
     /**
      * The path name to the certificate file.
-     * @var String
+     * @var string
      */
     protected $ssl_cert;
 
     /**
      * The path name to the certificate authority file.
-     * @var String
+     * @var string
      */
     protected $ca_cert;
 
     /**
      * The pathname to a directory that contains trusted SSL CA certificates in PEM format.
-     * @var String
+     * @var string
      */
     protected $ca_path;
 
     /**
      * A list of allowable ciphers to use for SSL encryption.
-     * @var String
+     * @var string
      */
     protected $cipher;
 
@@ -120,7 +123,7 @@ class MySQLConnection extends DatabaseConnection
      *
      * @param Configuration   $configuration Shared instance of the configuration class
      * @param LoggerInterface $logger        Shared instance of a logger class
-     * @param mysqli          $mysqli        Instance of the mysqli class
+     * @param MySQLi          $mysqli        Instance of the mysqli class
      */
     public function __construct($configuration, $logger, $mysqli)
     {

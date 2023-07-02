@@ -62,8 +62,8 @@ interface DatabaseQueryResultInterface
     /**
      * Get autoincremented ID generated on last insert.
      *
-     * @return mixed $id If the number is greater than maximal int value it's a String
-     *                   otherwise an Integer
+     * @return int|string $id If the number is greater than maximal int value it's a String
+     *                        otherwise an Integer
      */
     public function insert_id();
 

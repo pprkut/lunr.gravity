@@ -11,6 +11,7 @@
 namespace Lunr\Gravity\MySQL;
 
 use MySQLi_Result;
+use MySQLi;
 
 /**
  * MySQL/MariaDB asynchronous query result class.
@@ -20,7 +21,7 @@ class MySQLAsyncQueryResult extends MySQLQueryResult
 
     /**
      * Flag whether the result was fetched or not.
-     * @var Boolean
+     * @var bool
      */
     protected $fetched;
 

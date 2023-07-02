@@ -197,7 +197,7 @@ class SQLite3DMLQueryBuilder extends SQLDMLQueryBuilder
      *
      * @param string $left   Left expression
      * @param string $right  Right expression
-     * @param string $negate Whether to negate the comparison or not
+     * @param bool   $negate Whether to negate the comparison or not
      *
      * @return SQLite3DMLQueryBuilder $self Self reference
      */
@@ -213,7 +213,7 @@ class SQLite3DMLQueryBuilder extends SQLDMLQueryBuilder
      *
      * @param string $left   Left expression
      * @param string $right  Right expression
-     * @param string $negate Whether to negate the condition or not
+     * @param bool   $negate Whether to negate the condition or not
      *
      * @return SQLite3DMLQueryBuilder $self Self reference
      */
@@ -243,7 +243,7 @@ class SQLite3DMLQueryBuilder extends SQLDMLQueryBuilder
      *
      * @param string $left   Left expression
      * @param string $right  Right expression
-     * @param string $negate Whether to negate the comparison or not
+     * @param bool   $negate Whether to negate the comparison or not
      *
      * @return SQLite3DMLQueryBuilder $self Self reference
      */

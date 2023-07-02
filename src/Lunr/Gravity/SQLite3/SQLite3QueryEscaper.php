@@ -11,6 +11,7 @@
 namespace Lunr\Gravity\SQLite3;
 
 use Lunr\Gravity\DatabaseQueryEscaper;
+use Lunr\Gravity\DatabaseStringEscaperInterface;
 
 /**
  * This class provides SQLite3 specific escaping methods for SQL query parts.
@@ -20,13 +21,13 @@ class SQLite3QueryEscaper extends DatabaseQueryEscaper
 
     /**
      * The left identifier delimiter.
-     * @var String
+     * @var string
      */
     protected const IDENTIFIER_DELIMITER_L = '"';
 
     /**
      * The right identifier delimiter.
-     * @var String
+     * @var string
      */
     protected const IDENTIFIER_DELIMITER_R = '"';
 

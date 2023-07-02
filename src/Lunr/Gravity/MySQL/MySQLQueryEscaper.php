@@ -11,6 +11,7 @@
 namespace Lunr\Gravity\MySQL;
 
 use Lunr\Gravity\DatabaseQueryEscaper;
+use Lunr\Gravity\DatabaseStringEscaperInterface;
 
 /**
  * This class provides MySQL specific escaping methods for SQL query parts.

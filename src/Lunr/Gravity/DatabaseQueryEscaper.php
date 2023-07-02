@@ -31,13 +31,13 @@ abstract class DatabaseQueryEscaper implements QueryEscaperInterface
 
     /**
      * The left identifier delimiter.
-     * @var String
+     * @var string
      */
     protected const IDENTIFIER_DELIMITER_L = '`';
 
     /**
      * The right identifier delimiter.
-     * @var String
+     * @var string
      */
     protected const IDENTIFIER_DELIMITER_R = '`';
 

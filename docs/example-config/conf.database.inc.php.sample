@@ -24,31 +24,31 @@ $db = array();
 
 /**
  * Write-enabled Host
- * @global String $db['rw_host']
+ * @global string $db['rw_host']
  */
 $db['rw_host'] = '';
 
 /**
  * Readonly Host
- * @global String $db['ro_host']
+ * @global string $db['ro_host']
  */
 $db['ro_host'] = '';
 
 /**
  * Database user
- * @global String $db['username']
+ * @global string $db['username']
  */
 $db['username'] = '';
 
 /**
  * Database user password
- * @global String $db['password']
+ * @global string $db['password']
  */
 $db['password'] = '';
 
 /**
  * Database name
- * @global String $db['database']
+ * @global string $db['database']
  */
 $db['database'] = '';
 

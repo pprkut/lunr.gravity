@@ -32,7 +32,7 @@ abstract class MySQLAsyncQueryResultTest extends LunrBaseTest
 
     /**
      * The executed query.
-     * @var String
+     * @var string
      */
     protected $query;
 

@@ -30,7 +30,7 @@ class MockMySQLiWarning
 
     /**
      * The MySQL warning error code
-     * @var Integer
+     * @var int
      */
     public $errno;
 

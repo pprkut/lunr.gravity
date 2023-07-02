@@ -21,13 +21,13 @@ abstract class DatabaseConnection implements DatabaseStringEscaperInterface
 
     /**
      * Connection status
-     * @var Boolean
+     * @var bool
      */
     protected $connected;
 
     /**
      * Whether there's write access to the database or not
-     * @var Boolean
+     * @var bool
      */
     protected $readonly;
 

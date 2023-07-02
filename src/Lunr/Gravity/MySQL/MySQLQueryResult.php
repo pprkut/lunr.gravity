@@ -21,25 +21,25 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
 {
     /**
      * The MySQL error code for transaction deadlock.
-     * @var Integer
+     * @var int
      */
     private const DEADLOCK_ERR_CODE = 1213;
 
     /**
      * The MySQL error code for transaction lock timeout.
-     * @var Integer
+     * @var int
      */
     private const LOCK_TIMEOUT_ERR_CODE = 1205;
 
     /**
      * The query string that was executed.
-     * @var String
+     * @var string
      */
     protected $query;
 
     /**
      * The canonicalized query string that was executed.
-     * @var String
+     * @var string
      */
     protected $canonical_query;
 
@@ -57,25 +57,25 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
 
     /**
      * Flag whether the query was successful or not.
-     * @var Boolean
+     * @var bool
      */
     protected $success;
 
     /**
      * Flag whether the memory has been freed or not.
-     * @var Boolean
+     * @var bool
      */
     protected $freed;
 
     /**
      * Description of the error.
-     * @var String
+     * @var string
      */
     protected $error_message;
 
     /**
      * Error code.
-     * @var Integer
+     * @var int
      */
     protected $error_number;
 
@@ -93,13 +93,13 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
 
     /**
      * Number of affected rows.
-     * @var Integer
+     * @var int
      */
     protected $affected_rows;
 
     /**
      * Number of rows in the result set.
-     * @var Integer
+     * @var int
      */
     protected $num_rows;
 
@@ -264,8 +264,8 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
     /**
      * Get autoincremented ID generated on last insert.
      *
-     * @return mixed $id If the number is greater than maximal int value it's a String
-     *                   otherwise an Integer
+     * @return int|string $id If the number is greater than maximal int value it's a string
+     *                        otherwise an int
      */
     public function insert_id()
     {
