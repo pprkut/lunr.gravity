@@ -47,6 +47,12 @@ class MariaDBConnectionTest extends LunrBaseTest
     protected $mysqli;
 
     /**
+     * Instance of the tested class.
+     * @var MariaDBConnection
+     */
+    protected MariaDBConnection $class;
+
+    /**
      * TestCase Constructor.
      */
     public function setUp(): void
@@ -81,7 +87,7 @@ class MariaDBConnectionTest extends LunrBaseTest
 
         $this->class = new MariaDBConnection($this->configuration, $this->logger, $this->mysqli);
 
-        $this->reflection = new ReflectionClass('Lunr\Gravity\MariaDB\MariaDBConnection');
+        parent::baseSetUp($this->class);
     }
 
     /**
@@ -91,6 +97,7 @@ class MariaDBConnectionTest extends LunrBaseTest
     {
         unset($this->configuration);
         unset($this->logger);
+        unset($this->class);
 
         parent::tearDown();
     }

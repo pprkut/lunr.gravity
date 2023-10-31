@@ -38,6 +38,12 @@ abstract class MariaDBSimpleDMLQueryBuilderTest extends LunrBaseTest
     protected $builder;
 
     /**
+     * Instance of the tested class.
+     * @var MariaDBSimpleDMLQueryBuilder
+     */
+    protected MariaDBSimpleDMLQueryBuilder $class;
+
+    /**
      * Testcase Constructor.
      */
     public function setUp(): void
@@ -49,8 +55,9 @@ abstract class MariaDBSimpleDMLQueryBuilderTest extends LunrBaseTest
         $this->builder = $this->getMockBuilder('Lunr\Gravity\MariaDB\MariaDBDMLQueryBuilder')
                               ->getMock();
 
-        $this->class      = new MariaDBSimpleDMLQueryBuilder($this->builder, $this->escaper);
-        $this->reflection = new ReflectionClass('Lunr\Gravity\MariaDB\MariaDBSimpleDMLQueryBuilder');
+        $this->class = new MariaDBSimpleDMLQueryBuilder($this->builder, $this->escaper);
+
+        parent::baseSetUp($this->class);
     }
 
     /**
@@ -60,6 +67,7 @@ abstract class MariaDBSimpleDMLQueryBuilderTest extends LunrBaseTest
     {
         unset($this->escaper);
         unset($this->builder);
+        unset($this->class);
 
         parent::tearDown();
     }

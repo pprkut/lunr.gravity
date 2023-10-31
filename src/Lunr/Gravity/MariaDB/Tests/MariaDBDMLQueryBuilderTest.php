@@ -24,14 +24,30 @@ abstract class MariaDBDMLQueryBuilderTest extends LunrBaseTest
 {
 
     /**
+     * Instance of the tested class.
+     * @var MariaDBDMLQueryBuilder
+     */
+    protected MariaDBDMLQueryBuilder $class;
+
+    /**
      * TestCase Constructor.
      */
     public function setUp(): void
     {
-        $this->class      = new MariaDBDMLQueryBuilder();
-        $this->reflection = new ReflectionClass('Lunr\Gravity\MariaDB\MariaDBDMLQueryBuilder');
+        $this->class = new MariaDBDMLQueryBuilder();
+
+        parent::baseSetUp($this->class);
     }
 
+    /**
+     * TestCase Destructor.
+     */
+    public function tearDown(): void
+    {
+        unset($this->class);
+
+        parent::tearDown();
+    }
 }
 
 ?>
