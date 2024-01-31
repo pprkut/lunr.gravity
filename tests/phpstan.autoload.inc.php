@@ -27,7 +27,6 @@ require_once $autoload_file;
 // Define application config lookup path
 $paths = [
     get_include_path(),
-    $base . '/config',
     $base . '/src',
 ];
 
