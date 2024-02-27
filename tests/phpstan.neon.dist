@@ -13,8 +13,3 @@ parameters:
             paths:
                 - ../src/Lunr/Gravity/MySQL/MySQLConnection.php
                 - ../src/Lunr/Gravity/SQLite3/SQLite3Connection.php
-        -
-            message: '#\$escaper is assigned outside of the constructor#'
-            paths:
-                - ../src/Lunr/Gravity/MySQL/MySQLConnection.php
-                - ../src/Lunr/Gravity/SQLite3/SQLite3Connection.php
