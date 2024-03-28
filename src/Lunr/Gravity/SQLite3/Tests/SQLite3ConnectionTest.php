@@ -88,6 +88,10 @@ abstract class SQLite3ConnectionTest extends LunrBaseTest
 
         $this->sqlite3 = $this->getMockBuilder('Lunr\Gravity\SQLite3\LunrSQLite3')->getMock();
 
+        $this->sqlite3->expects($this->once())
+                      ->method('enableExceptions')
+                      ->with(FALSE);
+
         $this->sqlite3_result = $this->getMockBuilder('SQLite3Result')
                                      ->disableOriginalConstructor()
                                      ->getMock();

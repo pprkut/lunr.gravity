@@ -142,6 +142,8 @@ class MySQLConnection extends DatabaseConnection
         $this->options[ MYSQLI_OPT_INT_AND_FLOAT_NATIVE ] = TRUE;
 
         $this->set_configuration();
+
+        mysqli_report($configuration['db']['error_reporting'] ?? MYSQLI_REPORT_ERROR);
     }
 
     /**

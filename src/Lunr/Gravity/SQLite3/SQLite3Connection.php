@@ -54,6 +54,8 @@ class SQLite3Connection extends DatabaseConnection
         $this->sqlite3 =& $sqlite3;
 
         $this->set_configuration();
+
+        $this->sqlite3->enableExceptions($configuration['db']['error_reporting'] ?? FALSE);
     }
 
     /**

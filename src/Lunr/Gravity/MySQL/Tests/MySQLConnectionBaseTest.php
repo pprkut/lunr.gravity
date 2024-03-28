@@ -11,6 +11,7 @@
 namespace Lunr\Gravity\MySQL\Tests;
 
 use Lunr\Halo\PropertyTraits\PsrLoggerTestTrait;
+use MySQLi_Driver;
 
 /**
  * This class contains basic tests for the MySQLConnection class.
@@ -148,6 +149,16 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
     public function testOptionsIsSetCorrectly(): void
     {
         $this->assertPropertyEquals('options', [ MYSQLI_OPT_INT_AND_FLOAT_NATIVE => TRUE ]);
+    }
+
+    /**
+     * Test that options is set correctly.
+     */
+    public function testErrorReportingIsSetCorrectly(): void
+    {
+        $driver = new MySQLi_Driver();
+
+        $this->assertEquals($driver->report_mode, MYSQLI_REPORT_ERROR);
     }
 
     /**
