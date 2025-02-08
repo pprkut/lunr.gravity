@@ -115,9 +115,9 @@ class SQLite3QueryEscaper extends DatabaseQueryEscaper
      *
      * @return string|null $return NULL for invalid indices, escaped string otherwise.
      */
-    public function index_hint($keyword, $indices, $for = ''): ?string
+    public function index_hint(string $keyword, array $indices, string $for = ''): ?string
     {
-        if (!is_array($indices) || empty($indices))
+        if (empty($indices))
         {
             return NULL;
         }

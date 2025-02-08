@@ -192,16 +192,16 @@ class MySQLDMLQueryBuilder extends SQLDMLQueryBuilder
     /**
      * Define GROUP BY clause of the SQL statement.
      *
-     * @param string $expr  Expression to group by
-     * @param bool   $order Order ASCending/TRUE or DESCending/FALSE, default no order/NULL
+     * @param string    $expr  Expression to group by
+     * @param bool|null $order Order ASCending/TRUE or DESCending/FALSE, default no order/NULL
      *
      * @return $this Self reference
      */
-    public function group_by($expr, $order = NULL): static
+    public function group_by(string $expr, ?bool $order = NULL): static
     {
         $this->sql_group_by($expr);
 
-        if ($order !== NULL && is_bool($order))
+        if ($order !== NULL)
         {
             $direction       = ($order === TRUE) ? ' ASC' : ' DESC';
             $this->group_by .= $direction;

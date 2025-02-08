@@ -473,7 +473,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
             $column_names = ' (' . implode(', ', $column_names) . ')';
         }
 
-        if ($recursive_query != '' && $recursive_query !== NULL)
+        if ($recursive_query != '')
         {
             $this->is_recursive = TRUE;
 
@@ -485,7 +485,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
 
         if ($this->with != '')
         {
-            if ($recursive_query != '' && $recursive_query !== NULL)
+            if ($recursive_query != '')
             {
                 $this->with = $alias . $column_names . ' AS ( ' . $sql_query . $recursive_query . ' ), ' . $this->with;
             }
@@ -947,9 +947,9 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @return string $hints Comma separated list of index hints.
      */
-    protected function prepare_index_hints($index_hints): string
+    protected function prepare_index_hints(array $index_hints): string
     {
-        if (is_array($index_hints) && !empty($index_hints))
+        if (!empty($index_hints))
         {
             $index_hints = array_diff($index_hints, [ NULL ]);
             $hints       = ' ' . implode(', ', $index_hints);

@@ -227,12 +227,12 @@ class SQLite3DMLQueryBuilder extends SQLDMLQueryBuilder
     /**
      * Define GROUP BY clause of the SQL statement.
      *
-     * @param string $expr  Expression to group by
-     * @param bool   $order Not supported by SQLite
+     * @param string    $expr  Expression to group by
+     * @param bool|null $order Not supported by SQLite
      *
      * @return $this Self reference
      */
-    public function group_by($expr, $order = NULL): static
+    public function group_by(string $expr, ?bool $order = NULL): static
     {
         $this->sql_group_by($expr);
         return $this;

@@ -336,7 +336,7 @@ interface DMLQueryBuilderInterface
      *
      * @return $this Self reference
      */
-    public function group_by($expr): static;
+    public function group_by(string $expr): static;
 
     /**
      * Define HAVING clause of the SQL statement.
