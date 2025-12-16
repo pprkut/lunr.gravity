@@ -10,12 +10,16 @@
 
 namespace Lunr\Gravity\MariaDB\Tests\Helpers;
 
+use Lunr\Gravity\DatabaseStringEscaperInterface;
 use Lunr\Gravity\MariaDB\MariaDBConnection;
 use Lunr\Gravity\MariaDB\MariaDBDMLQueryBuilder;
 use Lunr\Gravity\MariaDB\MariaDBSimpleDMLQueryBuilder;
 use Lunr\Gravity\MySQL\MySQLQueryEscaper;
 use Lunr\Gravity\MySQL\MySQLQueryResult;
 use Lunr\Gravity\Tests\Helpers\DatabaseAccessObjectBaseTestCase;
+use Mockery;
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use Mockery\MockInterface;
 use MySQLi;
 use Psr\Log\LoggerInterface;
 
@@ -25,60 +29,50 @@ use Psr\Log\LoggerInterface;
 abstract class MariaDBDatabaseAccessObjectTestCase extends DatabaseAccessObjectBaseTestCase
 {
 
+    use MockeryPHPUnitIntegration;
+
     /**
      * Mock instance of the MariaDBConnection class.
-     * @var MariaDBConnection
+     * @var MariaDBConnection&MockInterface
      */
-    protected $db;
+    protected MariaDBConnection&MockInterface $db;
 
     /**
      * Mock instance of the Logger class
-     * @var LoggerInterface
+     * @var LoggerInterface&MockObject
      */
-    protected $logger;
-
-    /**
-     * Mock instance of the DMLQueryBuilder class
-     * @var MariaDBDMLQueryBuilder
-     */
-    protected $builder;
+    protected LoggerInterface&MockObject $logger;
 
     /**
      * Real instance of the DMLQueryBuilder class
      * @var MariaDBDMLQueryBuilder
      */
-    protected $realBuilder;
+    protected MariaDBDMLQueryBuilder $realBuilder;
 
     /**
      * Real instance of the SimpleDMLQueryBuilder class
      * @var MariaDBSimpleDMLQueryBuilder
      */
-    protected $realSimpleBuilder;
-
-    /**
-     * Mock instance of the QueryEscaper class
-     * @var MySQLQueryEscaper
-     */
-    protected $escaper;
+    protected MariaDBSimpleDMLQueryBuilder $realSimpleBuilder;
 
     /**
      * Real instance of the QueryEscaper class
      * @var MySQLQueryEscaper
      */
-    protected $realEscaper;
+    protected MySQLQueryEscaper $realEscaper;
 
     /**
      * Mock instance of the QueryResult class
-     * @var MySQLQueryResult
+     * @var MySQLQueryResult&MockInterface
      */
-    protected $result;
+    protected MySQLQueryResult&MockInterface $result;
 
     /**
      * Testcase Constructor.
      */
     public function setUp(): void
     {
-        $mockEscaper = $this->getMockBuilder('Lunr\Gravity\DatabaseStringEscaperInterface')
+        $mockEscaper = $this->getMockBuilder(DatabaseStringEscaperInterface::class)
                             ->getMock();
 
         $mockEscaper->expects($this->any())
@@ -90,7 +84,7 @@ abstract class MariaDBDatabaseAccessObjectTestCase extends DatabaseAccessObjectB
 
         $this->realSimpleBuilder = new MariaDBSimpleDMLQueryBuilder($this->realBuilder, $this->realEscaper);
 
-        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
+        $this->logger = $this->getMockBuilder(LoggerInterface::class)->getMock();
 
         $mysqli = $this->getMockBuilder(MySQLi::class)
                        ->disableOriginalConstructor()
@@ -104,25 +98,13 @@ abstract class MariaDBDatabaseAccessObjectTestCase extends DatabaseAccessObjectB
             'driver'   => 'mysql',
         ];
 
-        $this->db = $this->getMockBuilder('Lunr\Gravity\MariaDB\MariaDBConnection')
-                         ->setConstructorArgs([ $config, $this->logger, $mysqli ])
-                         ->getMock();
+        $this->db = Mockery::mock(MariaDBConnection::class, [ $config, $this->logger, $mysqli ]);
 
-        $this->builder = $this->getMockBuilder('Lunr\Gravity\MariaDB\MariaDBDMLQueryBuilder')
-                              ->disableOriginalConstructor()
-                              ->getMock();
-
-        $this->escaper = $this->getMockBuilder('Lunr\Gravity\MySQL\MySQLQueryEscaper')
-                              ->disableOriginalConstructor()
-                              ->getMock();
-
-        $this->result = $this->getMockBuilder('Lunr\Gravity\MySQL\MySQLQueryResult')
-                             ->disableOriginalConstructor()
-                             ->getMock();
+        $this->result = Mockery::mock(MySQLQueryResult::class);
 
         $this->db->expects($this->once())
                  ->method('get_query_escaper_object')
-                 ->willReturn($this->escaper);
+                 ->willReturn($this->realEscaper);
     }
 
     /**
@@ -132,8 +114,6 @@ abstract class MariaDBDatabaseAccessObjectTestCase extends DatabaseAccessObjectB
     {
         unset($this->db);
         unset($this->logger);
-        unset($this->builder);
-        unset($this->escaper);
         unset($this->result);
         unset($this->realEscaper);
         unset($this->realBuilder);

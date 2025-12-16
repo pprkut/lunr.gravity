@@ -10,7 +10,7 @@
 
 namespace Lunr\Gravity\Tests\Helpers;
 
-use Lunr\Halo\FluidInterfaceMock;
+use Lunr\Gravity\Exceptions\QueryException;
 
 /**
  * This trait contains helper methods to test general success and error cases of SELECT queries.
@@ -28,29 +28,42 @@ trait DatabaseAccessObjectQueryTestTrait
      */
     public function expectResultOnSuccess($data, $format = 'array'): void
     {
-        $mock = new FluidInterfaceMock();
+        if (property_exists($this, 'realSimpleBuilder'))
+        {
+            $this->db->shouldReceive('get_new_dml_query_builder_object')
+                     ->atLeast()
+                     ->once()
+                     ->andReturnUsing(fn(bool $argument = TRUE) => $argument ? $this->realSimpleBuilder : $this->realBuilder);
+        }
+        else
+        {
+            $this->db->shouldReceive('get_new_dml_query_builder_object')
+                     ->atLeast()
+                     ->once()
+                     ->andReturn($this->realBuilder);
+        }
 
-        $this->db->expects($this->atLeast(1))
-                 ->method('get_new_dml_query_builder_object')
-                 ->willReturn($mock);
+        $this->db->shouldReceive('query')
+                 ->once()
+                 ->andReturn($this->result);
 
-        $this->db->expects($this->once())
-                 ->method('query')
-                 ->willReturn($this->result);
+        $this->result->shouldReceive('warnings')
+                     ->once()
+                     ->andReturn(NULL);
 
-        $this->result->expects($this->once())
-                     ->method('has_failed')
-                     ->willReturn(FALSE);
+        $this->result->shouldReceive('has_failed')
+                     ->once()
+                     ->andReturn(FALSE);
 
         $count = $format === 'cell' ? 1 : count($data);
 
-        $this->result->expects($this->once())
-                     ->method('number_of_rows')
-                     ->willReturn($count);
+        $this->result->shouldReceive('number_of_rows')
+                     ->once()
+                     ->andReturn($count);
 
-        $this->result->expects($this->once())
-                     ->method('result_' . $format)
-                     ->willReturn($data);
+        $this->result->shouldReceive('result_' . $format)
+                     ->once()
+                     ->andReturn($data);
     }
 
     /**
@@ -62,26 +75,39 @@ trait DatabaseAccessObjectQueryTestTrait
      */
     public function expectNoResultsFound($format = 'array'): void
     {
-        $mock = new FluidInterfaceMock();
+        if (property_exists($this, 'realSimpleBuilder'))
+        {
+            $this->db->shouldReceive('get_new_dml_query_builder_object')
+                     ->atLeast()
+                     ->once()
+                     ->andReturnUsing(fn(bool $argument = TRUE) => $argument ? $this->realSimpleBuilder : $this->realBuilder);
+        }
+        else
+        {
+            $this->db->shouldReceive('get_new_dml_query_builder_object')
+                     ->atLeast()
+                     ->once()
+                     ->andReturn($this->realBuilder);
+        }
 
-        $this->db->expects($this->atLeast(1))
-                 ->method('get_new_dml_query_builder_object')
-                 ->willReturn($mock);
+        $this->db->shouldReceive('query')
+                 ->once()
+                 ->andReturn($this->result);
 
-        $this->db->expects($this->once())
-                 ->method('query')
-                 ->willReturn($this->result);
+        $this->result->shouldReceive('warnings')
+                     ->once()
+                     ->andReturn(NULL);
 
-        $this->result->expects($this->once())
-                     ->method('has_failed')
-                     ->willReturn(FALSE);
+        $this->result->shouldReceive('has_failed')
+                     ->once()
+                     ->andReturn(FALSE);
 
-        $this->result->expects($this->once())
-                     ->method('number_of_rows')
-                     ->willReturn(0);
+        $this->result->shouldReceive('number_of_rows')
+                     ->once()
+                     ->andReturn(0);
 
-        $this->result->expects($this->never())
-                     ->method('result_' . $format);
+        $this->result->shouldReceive('result_' . $format)
+                     ->never();
     }
 
     /**
@@ -91,41 +117,54 @@ trait DatabaseAccessObjectQueryTestTrait
      */
     protected function expectQueryError(): void
     {
-        $mock = new FluidInterfaceMock();
+        if (property_exists($this, 'realSimpleBuilder'))
+        {
+            $this->db->shouldReceive('get_new_dml_query_builder_object')
+                     ->atLeast()
+                     ->once()
+                     ->andReturnUsing(fn(bool $argument = TRUE) => $argument ? $this->realSimpleBuilder : $this->realBuilder);
+        }
+        else
+        {
+            $this->db->shouldReceive('get_new_dml_query_builder_object')
+                     ->atLeast()
+                     ->once()
+                     ->andReturn($this->realBuilder);
+        }
 
-        $this->db->expects($this->atLeast(1))
-                 ->method('get_new_dml_query_builder_object')
-                 ->willReturn($mock);
+        $this->db->shouldReceive('query')
+                 ->once()
+                 ->andReturn($this->result);
 
-        $this->db->expects($this->once())
-                 ->method('query')
-                 ->willReturn($this->result);
+        $this->result->shouldReceive('warnings')
+                     ->once()
+                     ->andReturn(NULL);
 
-        $this->result->expects($this->once())
-                     ->method('has_failed')
-                     ->willReturn(TRUE);
+        $this->result->shouldReceive('has_failed')
+                     ->once()
+                     ->andReturn(TRUE);
 
-        $this->result->expects($this->once())
-                     ->method('error_number')
-                     ->willReturn(1);
+        $this->result->shouldReceive('error_number')
+                     ->once()
+                     ->andReturn(1);
 
-        $this->result->expects($this->exactly(2))
-                     ->method('error_message')
-                     ->willReturn('Error!');
+        $this->result->shouldReceive('error_message')
+                     ->twice()
+                     ->andReturn('Error!');
 
-        $this->result->expects($this->exactly(2))
-                     ->method('query')
-                     ->willReturn('QUERY;');
+        $this->result->shouldReceive('query')
+                     ->twice()
+                     ->andReturn('QUERY;');
 
-        $this->result->expects($this->any())
-                     ->method('has_deadlock')
-                     ->willReturn(FALSE);
+        $this->result->shouldReceive('has_deadlock')
+                     ->zeroOrMoreTimes()
+                     ->andReturn(FALSE);
 
-        $this->result->expects($this->any())
-                     ->method('has_lock_timeout')
-                     ->willReturn(FALSE);
+        $this->result->shouldReceive('has_lock_timeout')
+                     ->zeroOrMoreTimes()
+                     ->andReturn(FALSE);
 
-        $this->expectException('Lunr\Gravity\Exceptions\QueryException');
+        $this->expectException(QueryException::class);
         $this->expectExceptionMessage('Database query error!');
     }
 
@@ -136,27 +175,40 @@ trait DatabaseAccessObjectQueryTestTrait
      */
     protected function expectQuerySuccess(): void
     {
-        $mock = new FluidInterfaceMock();
+        if (property_exists($this, 'realSimpleBuilder'))
+        {
+            $this->db->shouldReceive('get_new_dml_query_builder_object')
+                     ->atLeast()
+                     ->once()
+                     ->andReturnUsing(fn(bool $argument = TRUE) => $argument ? $this->realSimpleBuilder : $this->realBuilder);
+        }
+        else
+        {
+            $this->db->shouldReceive('get_new_dml_query_builder_object')
+                     ->atLeast()
+                     ->once()
+                     ->andReturn($this->realBuilder);
+        }
 
-        $this->db->expects($this->atLeast(1))
-                 ->method('get_new_dml_query_builder_object')
-                 ->willReturn($mock);
+        $this->db->shouldReceive('query')
+                 ->once()
+                 ->andReturn($this->result);
 
-        $this->db->expects($this->once())
-                 ->method('query')
-                 ->willReturn($this->result);
+        $this->result->shouldReceive('warnings')
+                     ->once()
+                     ->andReturn(NULL);
 
-        $this->result->expects($this->once())
-                     ->method('has_failed')
-                     ->willReturn(FALSE);
+        $this->result->shouldReceive('has_failed')
+                     ->once()
+                     ->andReturn(FALSE);
 
-        $this->result->expects($this->any())
-                     ->method('has_deadlock')
-                     ->willReturn(FALSE);
+        $this->result->shouldReceive('has_deadlock')
+                     ->zeroOrMoreTimes()
+                     ->andReturn(FALSE);
 
-        $this->result->expects($this->any())
-                     ->method('has_lock_timeout')
-                     ->willReturn(FALSE);
+        $this->result->shouldReceive('has_lock_timeout')
+                     ->zeroOrMoreTimes()
+                     ->andReturn(FALSE);
     }
 
     /**
@@ -166,27 +218,48 @@ trait DatabaseAccessObjectQueryTestTrait
      */
     protected function expectQuerySuccessAfterRetry(): void
     {
-        $mock = new FluidInterfaceMock();
+        if (property_exists($this, 'realSimpleBuilder'))
+        {
+            $this->db->shouldReceive('get_new_dml_query_builder_object')
+                     ->atLeast()
+                     ->once()
+                     ->andReturnUsing(fn(bool $argument = TRUE) => $argument ? $this->realSimpleBuilder : $this->realBuilder);
+        }
+        else
+        {
+            $this->db->shouldReceive('get_new_dml_query_builder_object')
+                     ->atLeast()
+                     ->once()
+                     ->andReturn($this->realBuilder);
+        }
 
-        $this->db->expects($this->atLeast(1))
-                 ->method('get_new_dml_query_builder_object')
-                 ->willReturn($mock);
+        $this->db->shouldReceive('query')
+                 ->twice()
+                 ->andReturn($this->result);
 
-        $this->db->expects($this->exactly(2))
-                 ->method('query')
-                 ->willReturn($this->result);
+        $this->result->shouldReceive('query')
+                     ->once()
+                     ->andReturn('QUERY');
 
-        $this->result->expects($this->once())
-                     ->method('has_failed')
-                     ->willReturnOnConsecutiveCalls(FALSE);
+        $this->result->shouldReceive('warnings')
+                     ->once()
+                     ->andReturn(NULL);
 
-        $this->result->expects($this->exactly(2))
-                     ->method('has_deadlock')
-                     ->willReturnOnConsecutiveCalls(TRUE, FALSE);
+        $this->result->shouldReceive('has_failed')
+                     ->once()
+                     ->andReturn(FALSE);
 
-        $this->result->expects($this->once())
-                     ->method('has_lock_timeout')
-                     ->willReturnOnConsecutiveCalls(FALSE);
+        $this->result->shouldReceive('has_deadlock')
+                     ->once()
+                     ->andReturn(TRUE);
+
+        $this->result->shouldReceive('has_deadlock')
+                     ->once()
+                     ->andReturn(FALSE);
+
+        $this->result->shouldReceive('has_lock_timeout')
+                     ->once()
+                     ->andReturn(FALSE);
     }
 
 }
