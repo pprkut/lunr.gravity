@@ -175,7 +175,7 @@ class SQLite3Connection extends DatabaseConnection
     /**
      * Return a new instance of a QueryBuilder object.
      *
-     * @return SQLite3DMLQueryBuilder $builder New SQLite3DMLQueryBuilder object instance
+     * @return SQLite3DMLQueryBuilder New SQLite3DMLQueryBuilder object instance
      */
     public function get_new_dml_query_builder_object(): SQLite3DMLQueryBuilder
     {

@@ -154,9 +154,9 @@ abstract class DatabaseConnection implements DatabaseStringEscaperInterface
     /**
      * Return a new instance of a QueryBuilder object.
      *
-     * @return DatabaseDMLQueryBuilder $builder New DatabaseDMLQueryBuilder object instance
+     * @return DMLQueryBuilderInterface New DML query builder object instance
      */
-    abstract public function get_new_dml_query_builder_object();
+    abstract public function get_new_dml_query_builder_object(): DMLQueryBuilderInterface;
 
     /**
      * Return a new instance of a QueryEscaper object.
