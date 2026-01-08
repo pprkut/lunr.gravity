@@ -23,14 +23,6 @@ class DatabaseConnectionBaseTest extends DatabaseConnectionTestCase
     use PsrLoggerTestTrait;
 
     /**
-     * Test that the Configuration class is passed by reference.
-     */
-    public function testConfigurationIsPassedByReference(): void
-    {
-        $this->assertPropertySame('config', $this->config);
-    }
-
-    /**
      * Test that the connected flag is set to FALSE by default.
      */
     public function testConnectedIsFalse(): void

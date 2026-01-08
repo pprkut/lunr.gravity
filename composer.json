@@ -8,7 +8,6 @@
   "require": {
     "psr/log": ">=1.1",
     "php": ">=8.1",
-    "lunr/config": "~0.12.0",
     "lunr/ticks": "~0.12.0"
   },
   "suggest": {
@@ -16,6 +15,7 @@
     "ext-sqlite": "Needed for SQLite support in Gravity"
   },
   "require-dev": {
+    "lunr/config": "~0.12.0",
     "lunr/halo": "~0.11.0",
     "mockery/mockery": "~1.6",
     "phpunit/phpunit": ">=9.0 <9.6",

@@ -24,6 +24,14 @@ class MySQLConnectionBaseTest extends MySQLConnectionTestCase
     use PsrLoggerTestTrait;
 
     /**
+     * Test that the Configuration class is passed by reference.
+     */
+    public function testConfigurationIsPassedByReference(): void
+    {
+        $this->assertPropertySame('config', $this->configuration);
+    }
+
+    /**
      * Test that the mysqli class was passed correctly.
      */
     public function testMysqliPassed(): void

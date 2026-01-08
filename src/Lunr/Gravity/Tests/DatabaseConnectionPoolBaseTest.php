@@ -10,6 +10,8 @@
 
 namespace Lunr\Gravity\Tests;
 
+use ArrayAccess;
+
 /**
  * This class contains basic tests for the DatabaseConnectionPool class.
  *
@@ -27,16 +29,16 @@ class DatabaseConnectionPoolBaseTest extends DatabaseConnectionPoolTestCase
     }
 
     /**
-     * Test that the Configuration class was passed correctly.
+     * Test that the configuration was passed correctly.
      */
     public function testConfigurationPassedByReference(): void
     {
-        $property = $this->poolReflection->getProperty('configuration');
+        $property = $this->poolReflection->getProperty('config');
         $property->setAccessible(TRUE);
 
         $value = $property->getValue($this->pool);
 
-        $this->assertInstanceOf('Lunr\Core\Configuration', $value);
+        $this->assertInstanceOf(ArrayAccess::class, $value);
         $this->assertSame($this->configuration, $value);
     }
 

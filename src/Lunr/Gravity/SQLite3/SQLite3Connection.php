@@ -10,7 +10,7 @@
 
 namespace Lunr\Gravity\SQLite3;
 
-use Lunr\Core\Configuration;
+use ArrayAccess;
 use Lunr\Gravity\DatabaseConnection;
 use Lunr\Gravity\Exceptions\ConnectionException;
 use Lunr\Gravity\Exceptions\DefragmentationException;
@@ -24,9 +24,16 @@ use Psr\Log\LoggerInterface;
  *  'driver': string,
  *  'errorReporting'?: int|bool
  * }
+ * @phpstan-type SQLite3ConfigObject ArrayAccess<string, bool|int|string>
  */
 class SQLite3Connection extends DatabaseConnection
 {
+
+    /**
+     * Database config
+     * @var SQLite3ConfigObject|SQLite3Config
+     */
+    protected ArrayAccess|array $config;
 
     /**
      * Database to connect to.
@@ -49,14 +56,15 @@ class SQLite3Connection extends DatabaseConnection
     /**
      * Constructor.
      *
-     * @param Configuration|SQLite3Config $config  Database config
-     * @param LoggerInterface             $logger  Shared instance of a logger class
-     * @param LunrSQLite3                 $sqlite3 Instance of the LunrSQLite3 class
+     * @param SQLite3ConfigObject|SQLite3Config $config  Database config
+     * @param LoggerInterface                   $logger  Shared instance of a logger class
+     * @param LunrSQLite3                       $sqlite3 Instance of the LunrSQLite3 class
      */
-    public function __construct(Configuration|array $config, LoggerInterface $logger, LunrSQLite3 $sqlite3)
+    public function __construct(ArrayAccess|array $config, LoggerInterface $logger, LunrSQLite3 $sqlite3)
     {
-        parent::__construct($config, $logger);
+        parent::__construct($logger);
 
+        $this->config  = $config;
         $this->sqlite3 =& $sqlite3;
 
         $this->set_configuration();

@@ -10,21 +10,23 @@
 
 namespace Lunr\Gravity;
 
-use Lunr\Core\Configuration;
+use ArrayAccess;
 use MySQLi;
 use Psr\Log\LoggerInterface;
 
 /**
  * This class implements a simple database connection pool.
+ *
+ * @phpstan-type DatabaseConfig ArrayAccess<string, scalar>|array<string, scalar>
  */
 class DatabaseConnectionPool
 {
 
     /**
-     * Shared instance of the Configuration class
-     * @var Configuration
+     * Database configuration
+     * @var DatabaseConfig
      */
-    protected $configuration;
+    protected ArrayAccess|array $config;
 
     /**
      * Shared instance of a Logger class
@@ -47,13 +49,13 @@ class DatabaseConnectionPool
     /**
      * Constructor.
      *
-     * @param Configuration   $configuration Shared instance of the configuration class
-     * @param LoggerInterface $logger        Shared instance of a logger class
+     * @param DatabaseConfig  $config Shared instance of the configuration class
+     * @param LoggerInterface $logger Shared instance of a logger class
      */
-    public function __construct($configuration, $logger)
+    public function __construct(ArrayAccess|array $config, $logger)
     {
-        $this->configuration = $configuration;
-        $this->logger        = $logger;
+        $this->config = $config;
+        $this->logger = $logger;
 
         $this->roPool = [];
         $this->rwPool = [];
@@ -64,7 +66,6 @@ class DatabaseConnectionPool
      */
     public function __destruct()
     {
-        unset($this->configuration);
         unset($this->logger);
         unset($this->roPool);
         unset($this->rwPool);
@@ -122,7 +123,7 @@ class DatabaseConnectionPool
     {
         $store = $ro ? 'roPool' : 'rwPool';
 
-        switch ($this->configuration['db']['driver'])
+        switch ($this->config['driver'])
         {
             case 'mysql':
                 // Specifying the full namespace here is necessary because of a restriction
@@ -140,7 +141,7 @@ class DatabaseConnectionPool
 
         if (($new === TRUE) || (count($this->$store) == 0))
         {
-            $connection = new $type($this->configuration, $this->logger, $extra);
+            $connection = new $type($this->config, $this->logger, $extra);
 
             if ($ro === TRUE)
             {

@@ -10,7 +10,7 @@
 
 namespace Lunr\Gravity\MariaDB;
 
-use Lunr\Core\Configuration;
+use ArrayAccess;
 use Lunr\Gravity\MySQL\MySQLConnection;
 use mysqli;
 use Psr\Log\LoggerInterface;
@@ -19,6 +19,7 @@ use Psr\Log\LoggerInterface;
 * MariaDB database access class.
 *
 * @phpstan-import-type MySQLConfig from MySQLConnection
+* @phpstan-import-type MySQLConfigObject from MySQLConnection
 */
 class MariaDBConnection extends MySQLConnection
 {
@@ -26,11 +27,11 @@ class MariaDBConnection extends MySQLConnection
     /**
      * Constructor.
      *
-     * @param Configuration|MySQLConfig $config Database config
-     * @param LoggerInterface           $logger Shared instance of a logger class
-     * @param MySQLi                    $mysqli Instance of the mysqli class
+     * @param MySQLConfigObject|MySQLConfig $config Database config
+     * @param LoggerInterface               $logger Shared instance of a logger class
+     * @param MySQLi                        $mysqli Instance of the mysqli class
      */
-    public function __construct(Configuration|array $config, LoggerInterface $logger, MySQLi $mysqli)
+    public function __construct(ArrayAccess|array $config, LoggerInterface $logger, MySQLi $mysqli)
     {
         parent::__construct($config, $logger, $mysqli);
     }
