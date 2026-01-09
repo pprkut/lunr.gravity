@@ -10,7 +10,6 @@
 
 namespace Lunr\Gravity;
 
-use Lunr\Core\Configuration;
 use Lunr\Ticks\AnalyticsDetailLevel;
 use Lunr\Ticks\EventLogging\EventLoggerInterface;
 use Lunr\Ticks\TracingControllerInterface;
@@ -47,12 +46,6 @@ abstract class DatabaseConnection implements DatabaseStringEscaperInterface
     protected AnalyticsDetailLevel $analyticsDetailLevel;
 
     /**
-     * Database config
-     * @var Configuration|array
-     */
-    protected Configuration|array $config;
-
-    /**
      * Shared instance of a Logger class
      * @var LoggerInterface
      */
@@ -73,17 +66,15 @@ abstract class DatabaseConnection implements DatabaseStringEscaperInterface
     /**
      * Constructor.
      *
-     * @param Configuration|array $config Database config
-     * @param LoggerInterface     $logger Shared instance of a logger class
+     * @param LoggerInterface $logger Shared instance of a logger class
      */
-    public function __construct(Configuration|array $config, LoggerInterface $logger)
+    public function __construct(LoggerInterface $logger)
     {
         $this->connected = FALSE;
         $this->readonly  = FALSE;
 
         $this->analyticsDetailLevel = AnalyticsDetailLevel::None;
 
-        $this->config = $config;
         $this->logger = $logger;
     }
 
@@ -92,7 +83,6 @@ abstract class DatabaseConnection implements DatabaseStringEscaperInterface
      */
     public function __destruct()
     {
-        unset($this->config);
         unset($this->logger);
         unset($this->readonly);
         unset($this->analyticsDetailLevel);

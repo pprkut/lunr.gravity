@@ -16,7 +16,8 @@
         "psr4": {
             "prefix": "Lunr\\Core",
             "search-path": "/src/Lunr/Core/"
-        }
+        },
+        "development-only": true
     },
     "Lunr.Ticks": {
         "url": "https://github.com/lunr-php/lunr.ticks.git",

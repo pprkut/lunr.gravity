@@ -10,7 +10,9 @@
 
 namespace Lunr\Gravity\Tests;
 
+use Lunr\Core\Configuration;
 use Lunr\Gravity\DatabaseConnectionPool;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
@@ -36,16 +38,10 @@ abstract class DatabaseConnectionPoolTestCase extends TestCase
     protected $poolReflection;
 
     /**
-     * Mock instance of the sub Configuration class.
-     * @var Configuration
-     */
-    protected $subConfiguration;
-
-    /**
      * Mock instance of the Configuration class.
-     * @var Configuration
+     * @var Configuration&MockObject
      */
-    protected $configuration;
+    protected Configuration&MockObject $configuration;
 
     /**
      * Mock instance of a Logger class.
@@ -60,17 +56,7 @@ abstract class DatabaseConnectionPoolTestCase extends TestCase
      */
     public function emptySetup(): void
     {
-        $this->subConfiguration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
-
         $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
-
-        $map = [
-            [ 'db', $this->subConfiguration ],
-        ];
-
-        $this->configuration->expects($this->any())
-                      ->method('offsetGet')
-                      ->willReturnMap($map);
 
         $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
@@ -86,17 +72,7 @@ abstract class DatabaseConnectionPoolTestCase extends TestCase
      */
     public function unsupportedSetup(): void
     {
-        $this->subConfiguration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
-
         $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
-
-        $map = [
-            [ 'db', $this->subConfiguration ],
-        ];
-
-        $this->configuration->expects($this->any())
-                      ->method('offsetGet')
-                      ->willReturnMap($map);
 
         $map = [
             [ 'rw_host', 'rw_host' ],
@@ -106,9 +82,9 @@ abstract class DatabaseConnectionPoolTestCase extends TestCase
             [ 'driver', 'unsupported' ],
         ];
 
-        $this->subConfiguration->expects($this->any())
-                      ->method('offsetGet')
-                      ->willReturnMap($map);
+        $this->configuration->expects($this->any())
+                            ->method('offsetGet')
+                            ->willReturnMap($map);
 
         $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
@@ -124,17 +100,7 @@ abstract class DatabaseConnectionPoolTestCase extends TestCase
      */
     public function supportedSetup(): void
     {
-        $this->subConfiguration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
-
         $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
-
-        $map = [
-            [ 'db', $this->subConfiguration ],
-        ];
-
-        $this->configuration->expects($this->any())
-                      ->method('offsetGet')
-                      ->willReturnMap($map);
 
         $map = [
             [ 'rw_host', 'rw_host' ],
@@ -144,9 +110,9 @@ abstract class DatabaseConnectionPoolTestCase extends TestCase
             [ 'driver', 'mysql' ],
         ];
 
-        $this->subConfiguration->expects($this->any())
-                      ->method('offsetGet')
-                      ->willReturnMap($map);
+        $this->configuration->expects($this->any())
+                            ->method('offsetGet')
+                            ->willReturnMap($map);
 
         $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 

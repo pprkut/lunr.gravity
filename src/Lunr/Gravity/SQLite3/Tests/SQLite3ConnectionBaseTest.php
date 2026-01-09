@@ -19,6 +19,14 @@ class SQLite3ConnectionBaseTest extends SQLite3ConnectionTestCase
 {
 
     /**
+     * Test that the Configuration class is passed by reference.
+     */
+    public function testConfigurationIsPassedByReference(): void
+    {
+        $this->assertPropertySame('config', $this->configuration);
+    }
+
+    /**
      * Test that the SQLite3 class was passed correctly.
      */
     public function testSQLite3Passed(): void

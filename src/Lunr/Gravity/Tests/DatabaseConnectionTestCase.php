@@ -32,12 +32,6 @@ abstract class DatabaseConnectionTestCase extends LunrBaseTestCase
     use MockeryPHPUnitIntegration;
 
     /**
-     * Mock instance of the Configuration class.
-     * @var Configuration
-     */
-    protected $config;
-
-    /**
      * Mock instance of a Logger class.
      * @var LoggerInterface
      */
@@ -72,8 +66,6 @@ abstract class DatabaseConnectionTestCase extends LunrBaseTestCase
      */
     public function setUp(): void
     {
-        $this->config = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
-
         $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
         $this->eventLogger = $this->getMockBuilder(EventLoggerInterface::class)
@@ -88,7 +80,7 @@ abstract class DatabaseConnectionTestCase extends LunrBaseTestCase
                             );
 
         $this->class = $this->getMockBuilder('Lunr\Gravity\DatabaseConnection')
-                            ->setConstructorArgs([ &$this->config, &$this->logger ])
+                            ->setConstructorArgs([ &$this->logger ])
                             ->getMockForAbstractClass();
 
         parent::baseSetUp($this->class);
@@ -99,7 +91,6 @@ abstract class DatabaseConnectionTestCase extends LunrBaseTestCase
      */
     public function tearDown(): void
     {
-        unset($this->config);
         unset($this->logger);
         unset($this->eventLogger);
         unset($this->event);

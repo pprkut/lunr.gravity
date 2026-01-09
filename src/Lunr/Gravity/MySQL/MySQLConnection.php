@@ -10,7 +10,7 @@
 
 namespace Lunr\Gravity\MySQL;
 
-use Lunr\Core\Configuration;
+use ArrayAccess;
 use Lunr\Gravity\DatabaseConnection;
 use Lunr\Gravity\Exceptions\ConnectionException;
 use Lunr\Gravity\Exceptions\DefragmentationException;
@@ -37,9 +37,16 @@ use Psr\Log\LoggerInterface;
  *  'driver': string,
  *  'errorReporting'?: int|bool
  * }
+ * @phpstan-type MySQLConfigObject ArrayAccess<string, bool|int|string>
  */
 class MySQLConnection extends DatabaseConnection
 {
+
+    /**
+     * Database config
+     * @var MySQLConfigObject|MySQLConfig
+     */
+    protected ArrayAccess|array $config;
 
     /**
      * Hostname of the database server (read/write access)
@@ -152,14 +159,15 @@ class MySQLConnection extends DatabaseConnection
     /**
      * Constructor.
      *
-     * @param Configuration|MySQLConfig $config Database config
-     * @param LoggerInterface           $logger Shared instance of a logger class
-     * @param MySQLi                    $mysqli Instance of the mysqli class
+     * @param MySQLConfigObject|MySQLConfig $config Database config
+     * @param LoggerInterface               $logger Shared instance of a logger class
+     * @param MySQLi                        $mysqli Instance of the mysqli class
      */
-    public function __construct(Configuration|array $config, LoggerInterface $logger, MySQLi $mysqli)
+    public function __construct(ArrayAccess|array $config, LoggerInterface $logger, MySQLi $mysqli)
     {
-        parent::__construct($config, $logger);
+        parent::__construct($logger);
 
+        $this->config = $config;
         $this->mysqli =& $mysqli;
 
         $this->queryHint                                  = '';
