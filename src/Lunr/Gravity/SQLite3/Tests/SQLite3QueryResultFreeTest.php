@@ -94,6 +94,11 @@ class SQLite3QueryResultFreeTest extends SQLite3QueryResultTestCase
     public function testResultRowFreesDataIfFreedIsFalse(): void
     {
         $this->sqlite3Result->expects($this->once())
+                            ->method('fetchArray')
+                            ->with(SQLITE3_ASSOC)
+                            ->willReturn([[ 'col' => 'val' ]]);
+
+        $this->sqlite3Result->expects($this->once())
                             ->method('finalize');
 
         $this->class->result_row();
@@ -107,6 +112,11 @@ class SQLite3QueryResultFreeTest extends SQLite3QueryResultTestCase
     public function testResultRowDoesNotFreeDataIfFreedIsTrue(): void
     {
         $this->setReflectionPropertyValue('freed', TRUE);
+
+        $this->sqlite3Result->expects($this->once())
+                            ->method('fetchArray')
+                            ->with(SQLITE3_ASSOC)
+                            ->willReturn([[ 'col' => 'val' ]]);
 
         $this->sqlite3Result->expects($this->never())
                             ->method('finalize');

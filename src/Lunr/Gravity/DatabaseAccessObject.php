@@ -117,9 +117,9 @@ abstract class DatabaseAccessObject
      *
      * @param DatabaseQueryResultInterface $query The result of the run query
      *
-     * @return int|string Number of affected rows in the result set
+     * @return int|numeric-string Number of affected rows in the result set
      */
-    protected function get_affected_rows(DatabaseQueryResultInterface $query)
+    protected function get_affected_rows(DatabaseQueryResultInterface $query): int|string
     {
         $this->verify_query_success($query);
 
@@ -132,7 +132,7 @@ abstract class DatabaseAccessObject
      * @param DatabaseQueryResultInterface $query  The result of the run query
      * @param string                       $column Column to use as index
      *
-     * @return array<mixed, mixed> Indexed result array
+     * @return array<string, array<string, scalar|null>> Indexed result array
      */
     protected function indexed_result_array(DatabaseQueryResultInterface $query, string $column): array
     {
@@ -160,7 +160,7 @@ abstract class DatabaseAccessObject
      * @param bool                         $associative TRUE for returning rows as associative arrays,
      *                                                  FALSE for returning rows as enumerated arrays
      *
-     * @return array<int, array<string, mixed>> Result array
+     * @return list<array<string, scalar|null>> Result array
      */
     protected function result_array(DatabaseQueryResultInterface $query, bool $associative = TRUE): array
     {
@@ -179,7 +179,7 @@ abstract class DatabaseAccessObject
      *
      * @param DatabaseQueryResultInterface $query The result of the run query
      *
-     * @return array<string, mixed> Result array
+     * @return array<string, scalar|null> Result array
      */
     protected function result_row(DatabaseQueryResultInterface $query): array
     {
@@ -199,7 +199,7 @@ abstract class DatabaseAccessObject
      * @param DatabaseQueryResultInterface $query  The result of the run query
      * @param string                       $column The title of the requested column
      *
-     * @return mixed[] Result array
+     * @return list<scalar|null> Result array
      */
     protected function result_column(DatabaseQueryResultInterface $query, string $column): array
     {
@@ -219,9 +219,9 @@ abstract class DatabaseAccessObject
      * @param DatabaseQueryResultInterface $query The result of the run query
      * @param string                       $cell  The title of the requested cell
      *
-     * @return mixed Result value
+     * @return scalar|null Result value
      */
-    protected function result_cell(DatabaseQueryResultInterface $query, string $cell)
+    protected function result_cell(DatabaseQueryResultInterface $query, string $cell): bool|float|int|string|null
     {
         $this->verify_query_success($query);
 

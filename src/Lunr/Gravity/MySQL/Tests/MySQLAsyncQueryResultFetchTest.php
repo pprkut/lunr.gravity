@@ -87,6 +87,8 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTestCase
         $property->setAccessible(TRUE);
         $property->setValue($this->class, TRUE);
 
+        $this->setReflectionPropertyValue('affectedRows', 10);
+
         $this->mysqli->expects($this->never())
                      ->method('reap_async_query')
                      ->willReturn(FALSE);
@@ -125,6 +127,8 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTestCase
         $property = $this->reflection->getProperty('fetched');
         $property->setAccessible(TRUE);
         $property->setValue($this->class, TRUE);
+
+        $this->setReflectionPropertyValue('numRows', 10);
 
         $this->mysqli->expects($this->never())
                      ->method('reap_async_query')

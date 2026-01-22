@@ -102,6 +102,10 @@ class MySQLQueryResultFreeTest extends MySQLQueryResultTestCase
     public function testResultRowFreesDataIfFreedIsFalse(): void
     {
         $this->queryResult->expects($this->once())
+                          ->method('fetch_assoc')
+                          ->willReturn([[ 'col' => 'val' ]]);
+
+        $this->queryResult->expects($this->once())
                           ->method('free');
 
         $this->class->result_row();
@@ -115,6 +119,10 @@ class MySQLQueryResultFreeTest extends MySQLQueryResultTestCase
     public function testResultRowDoesNotFreeDataIfFreedIsTrue(): void
     {
         $this->setReflectionPropertyValue('freed', TRUE);
+
+        $this->queryResult->expects($this->once())
+                          ->method('fetch_assoc')
+                          ->willReturn([[ 'col' => 'val' ]]);
 
         $this->queryResult->expects($this->never())
                           ->method('free');

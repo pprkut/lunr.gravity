@@ -54,12 +54,9 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTestCase
     /**
      * Test that affected rows is a number on successful query.
      */
-    public function testAffectedRowsIsNumber(): void
+    public function testAffectedRowsIsUninitialized(): void
     {
-        $property = $this->reflection->getProperty('affectedRows');
-        $property->setAccessible(TRUE);
-
-        $this->assertNull($property->getValue($this->class));
+        $this->assertPropertyUnset('affectedRows');
     }
 
     /**
@@ -67,10 +64,7 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTestCase
      */
     public function testNumberOfRowsIsNumber(): void
     {
-        $property = $this->reflection->getProperty('numRows');
-        $property->setAccessible(TRUE);
-
-        $this->assertNull($property->getValue($this->class));
+        $this->assertPropertyUnset('numRows');
     }
 
     /**

@@ -128,11 +128,11 @@ class MySQLAsyncQueryResult extends MySQLQueryResult
     /**
      * Returns the number of rows affected by the last query.
      *
-     * @return int|string $number Number of rows in the result set.
+     * @return int|numeric-string Number of rows in the result set.
      *                            This is usually an integer, unless the number is > MAXINT.
      *                            Then it is a string.
      */
-    public function affected_rows()
+    public function affected_rows(): int|string
     {
         $this->fetch_result();
         return parent::affected_rows();
@@ -141,11 +141,11 @@ class MySQLAsyncQueryResult extends MySQLQueryResult
     /**
      * Returns the number of rows in the result set.
      *
-     * @return mixed $number Number of rows in the result set.
-     *                       This is usually an integer, unless the number is > MAXINT.
-     *                       Then it is a string.
+     * @return int|numeric-string Number of rows in the result set.
+     *                            This is usually an integer, unless the number is > MAXINT.
+     *                            Then it is a string.
      */
-    public function number_of_rows()
+    public function number_of_rows(): int|string
     {
         $this->fetch_result();
         return parent::number_of_rows();
@@ -157,9 +157,9 @@ class MySQLAsyncQueryResult extends MySQLQueryResult
      * @param bool $associative TRUE for returning rows as associative arrays,
      *                          FALSE for returning rows as enumerated arrays
      *
-     * @return array $output Result set as array
+     * @return list<array<string, scalar|null>> Result set as array
      */
-    public function result_array($associative = TRUE)
+    public function result_array(bool $associative = TRUE): array
     {
         $this->fetch_result();
         return parent::result_array($associative);
@@ -168,9 +168,9 @@ class MySQLAsyncQueryResult extends MySQLQueryResult
     /**
      * Get the first row of the result set.
      *
-     * @return array $output First result row as array
+     * @return array<string, scalar|null> First result row as array
      */
-    public function result_row()
+    public function result_row(): array
     {
         $this->fetch_result();
         return parent::result_row();
@@ -181,9 +181,9 @@ class MySQLAsyncQueryResult extends MySQLQueryResult
      *
      * @param string $column Column or Alias name
      *
-     * @return array $output Result column as array
+     * @return list<scalar|null> Result column as array
      */
-    public function result_column($column)
+    public function result_column(string $column): array
     {
         $this->fetch_result();
         return parent::result_column($column);
@@ -194,9 +194,9 @@ class MySQLAsyncQueryResult extends MySQLQueryResult
      *
      * @param string $column Column or Alias name
      *
-     * @return mixed $output NULL if it does not exist, the value otherwise
+     * @return scalar|null NULL if it does not exist, the value otherwise
      */
-    public function result_cell($column)
+    public function result_cell(string $column): bool|float|int|string|null
     {
         $this->fetch_result();
         return parent::result_cell($column);
