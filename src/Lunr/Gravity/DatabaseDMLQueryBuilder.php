@@ -22,169 +22,169 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      * SQL Query part: SELECT clause
      * @var string
      */
-    protected $select;
+    protected string $select;
 
     /**
      * SQL Query part: SELECT mode
      * @var array
      */
-    protected $selectMode;
+    protected array $selectMode;
 
     /**
      * SQL Query part: lock mode
      * @var string
      */
-    protected $lockMode;
+    protected string $lockMode;
 
     /**
      * SQL Query part: DELETE clause
      * @var string
      */
-    protected $delete;
+    protected string $delete;
 
     /**
      * SQL Query part: DELETE mode
      * @var array
      */
-    protected $deleteMode;
+    protected array $deleteMode;
 
     /**
      * SQL Query part: FROM clause
      * @var string
      */
-    protected $from;
+    protected string $from;
 
     /**
      * SQL Query part: INTO clause
      * @var string
      */
-    protected $into;
+    protected string $into;
 
     /**
      * SQL Query part: INSERT modes
      * @var array
      */
-    protected $insertMode;
+    protected array $insertMode;
 
     /**
      * SQL Query part: UPDATE clause
      * @var string
      */
-    protected $update;
+    protected string $update;
 
     /**
      * SQL Query part: UPDATE modes
      * @var array
      */
-    protected $updateMode;
+    protected array $updateMode;
 
     /**
      * SQL Query part: SET clause
      * @var string
      */
-    protected $set;
+    protected string $set;
 
     /**
      * SQL Query part: Column names
      * @var string
      */
-    protected $columnNames;
+    protected string $columnNames;
 
     /**
      * SQL Query part: VALUES
      * @var string
      */
-    protected $values;
+    protected string $values;
 
     /**
      * SQL Query part: UPSERT clause
      * @var string
      */
-    protected $upsert;
+    protected string $upsert;
 
     /**
      * SQL Query part: SELECT statement
      * @var string
      */
-    protected $selectStatement;
+    protected string $selectStatement;
 
     /**
      * SQL Query part: JOIN clause
      * @var string
      */
-    protected $join;
+    protected string $join;
 
     /**
      * SQL Query part: WHERE clause
      * @var string
      */
-    protected $where;
+    protected string $where;
 
     /**
      * SQL Query part: GROUP BY clause
      * @var string
      */
-    protected $groupBy;
+    protected string $groupBy;
 
     /**
      * SQL Query part: HAVING clause
      * @var string
      */
-    protected $having;
+    protected string $having;
 
     /**
      * SQL Query part: ORDER BY clause
      * @var string
      */
-    protected $orderBy;
+    protected string $orderBy;
 
     /**
      * SQL Query part: LIMIT clause
      * @var string
      */
-    protected $limit;
+    protected string $limit;
 
     /**
      * SQL Query part: WHERE clause
      * @var string
      */
-    protected $compound;
+    protected string $compound;
 
     /**
      * SQL Query part: Logical connector of expressions
      * @var string
      */
-    protected $connector;
+    protected string $connector;
 
     /**
      * SQL Query part: Boolean identifying if the join is not finished
      * @var bool
      */
-    protected $isUnfinishedJoin;
+    protected bool $isUnfinishedJoin;
 
     /**
      * SQL Query part: string identifying if the join type is type "using" or "on"
      * @var string
      */
-    protected $joinType;
+    protected string $joinType;
 
     /**
      * SQL Query part: String that contains the with query
      * @var string
      */
-    protected $with;
+    protected string $with;
 
     /**
      * Whether a recursive with statement is used or not
      * @var bool
      */
-    protected $isRecursive;
+    protected bool $isRecursive;
 
     /**
      * SQL Query part: returning clause
      * @var string
      */
-    protected $returning;
+    protected string $returning;
 
     /**
      * Constructor.
@@ -193,6 +193,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     {
         $this->select           = '';
         $this->selectMode       = [];
+        $this->lockMode         = '';
         $this->update           = '';
         $this->updateMode       = [];
         $this->delete           = '';
@@ -225,39 +226,40 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      */
     public function __destruct()
     {
-        unset($this->select);
-        unset($this->selectMode);
-        unset($this->update);
-        unset($this->updateMode);
-        unset($this->delete);
-        unset($this->deleteMode);
-        unset($this->from);
-        unset($this->join);
-        unset($this->where);
-        unset($this->groupBy);
-        unset($this->having);
-        unset($this->orderBy);
-        unset($this->limit);
-        unset($this->compound);
-        unset($this->connector);
-        unset($this->into);
-        unset($this->insertMode);
-        unset($this->set);
-        unset($this->columnNames);
-        unset($this->values);
-        unset($this->upsert);
-        unset($this->selectStatement);
-        unset($this->isUnfinishedJoin);
-        unset($this->joinType);
-        unset($this->with);
-        unset($this->isRecursive);
-        unset($this->returning);
+        $this->select           = '';
+        $this->selectMode       = [];
+        $this->lockMode         = '';
+        $this->update           = '';
+        $this->updateMode       = [];
+        $this->delete           = '';
+        $this->deleteMode       = [];
+        $this->from             = '';
+        $this->join             = '';
+        $this->where            = '';
+        $this->groupBy          = '';
+        $this->having           = '';
+        $this->orderBy          = '';
+        $this->limit            = '';
+        $this->connector        = '';
+        $this->into             = '';
+        $this->insertMode       = [];
+        $this->set              = '';
+        $this->columnNames      = '';
+        $this->values           = '';
+        $this->upsert           = '';
+        $this->selectStatement  = '';
+        $this->compound         = '';
+        $this->isUnfinishedJoin = FALSE;
+        $this->joinType         = '';
+        $this->with             = '';
+        $this->isRecursive      = FALSE;
+        $this->returning        = '';
     }
 
     /**
      * Construct and return a SELECT query.
      *
-     * @return string $query The constructed query string.
+     * @return string The constructed query string.
      */
     public function get_select_query(): string
     {
@@ -295,7 +297,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Construct and return a DELETE query.
      *
-     * @return string $query The constructed query string.
+     * @return string The constructed query string.
      */
     public function get_delete_query(): string
     {
@@ -318,7 +320,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Construct and return a INSERT query.
      *
-     * @return string $query The constructed query string.
+     * @return string The constructed query string.
      */
     public function get_insert_query(): string
     {
@@ -363,7 +365,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Construct and return a REPLACE query.
      *
-     * @return string $query The constructed query string.
+     * @return string The constructed query string.
      */
     public function get_replace_query(): string
     {
@@ -406,7 +408,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Construct and return an UPDATE query.
      *
-     * @return string $query The constructed query string.
+     * @return string The constructed query string.
      */
     public function get_update_query(): string
     {
@@ -434,12 +436,12 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define a SELECT clause.
      *
-     * @param string|null $select The columns to select
-     * @param string      $base   Whether to construct SELECT or RETURNING
+     * @param string|null          $select The columns to select
+     * @param "SELECT"|"RETURNING" $base   Whether to construct SELECT or RETURNING
      *
      * @return void
      */
-    protected function sql_select($select, $base = 'SELECT'): void
+    protected function sql_select(?string $select, string $base = 'SELECT'): void
     {
         $part = ($base == 'RETURNING') ? 'returning' : 'select';
 
@@ -466,7 +468,13 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @return void
      */
-    protected function sql_with($alias, $sqlQuery, $recursiveQuery = NULL, $union = NULL, $columnNames = NULL): void
+    protected function sql_with(
+        string $alias,
+        string $sqlQuery,
+        ?string $recursiveQuery = NULL,
+        ?string $union = NULL,
+        ?array $columnNames = NULL
+    ): void
     {
         if ($columnNames !== NULL)
         {
@@ -507,7 +515,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @return void
      */
-    protected function sql_update($tableReferences): void
+    protected function sql_update(string $tableReferences): void
     {
         if ($this->update != '')
         {
@@ -524,7 +532,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @return void
      */
-    protected function sql_delete($delete): void
+    protected function sql_delete(string $delete): void
     {
         if ($this->delete != '')
         {
@@ -542,7 +550,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @return void
      */
-    protected function sql_from($table, $indexHints = NULL): void
+    protected function sql_from(string $table, ?array $indexHints = NULL): void
     {
         if ($this->from == '')
         {
@@ -565,7 +573,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @return void
      */
-    protected function sql_join($tableReference, $type, $indexHints = NULL): void
+    protected function sql_join(string $tableReference, string $type, ?array $indexHints = NULL): void
     {
         $type = strtoupper($type);
 
@@ -593,7 +601,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @return void
      */
-    protected function sql_using($columnList): void
+    protected function sql_using(string $columnList): void
     {
         // Select join type.
         if ($this->joinType === '')
@@ -627,7 +635,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @return void
      */
-    protected function sql_into($table): void
+    protected function sql_into(string $table): void
     {
         $this->into = 'INTO ' . $table;
     }
@@ -639,7 +647,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @return void
      */
-    protected function sql_set($set): void
+    protected function sql_set(array $set): void
     {
         if ($this->set == '')
         {
@@ -667,7 +675,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @return void
      */
-    protected function sql_column_names($keys): void
+    protected function sql_column_names(array $keys): void
     {
         $this->columnNames = '(' . implode(', ', $keys) . ')';
     }
@@ -680,7 +688,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @return void
      */
-    protected function sql_values($values): void
+    protected function sql_values(array $values): void
     {
         if (empty($values))
         {
@@ -720,7 +728,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @return void
      */
-    protected function sql_upsert($key, $action, $target = NULL): void
+    protected function sql_upsert(string $key, string $action, ?string $target = NULL): void
     {
         $this->upsert = $key . ' ';
 
@@ -739,7 +747,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @return void
      */
-    protected function sql_select_statement($select): void
+    protected function sql_select_statement(string $select): void
     {
         if (strpos($select, 'SELECT') !== 0)
         {
@@ -752,14 +760,14 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define a conditional clause for the SQL statement.
      *
-     * @param string $left     Left expression
-     * @param string $right    Right expression
-     * @param string $operator Comparison operator
-     * @param string $base     Whether to construct WHERE, HAVING or ON
+     * @param int|float|string      $left     Left expression
+     * @param int|float|string      $right    Right expression
+     * @param string                $operator Comparison operator
+     * @param "WHERE"|"HAVING"|"ON" $base     Whether to construct WHERE, HAVING or ON
      *
      * @return void
      */
-    protected function sql_condition($left, $right, $operator = '=', $base = 'WHERE'): void
+    protected function sql_condition(int|float|string $left, int|float|string $right, string $operator = '=', string $base = 'WHERE'): void
     {
         $condition = ($base === 'ON') ? 'join' : strtolower($base);
 
@@ -805,13 +813,13 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define a compound clause for the SQL statement.
      *
-     * @param string $sqlQuery Left expression
-     * @param string $type     Whether to construct UNION, EXCEPT or INTERSECT
-     * @param mixed  $operator Whether to add ALL, DISTINCT or default
+     * @param string                       $sqlQuery Left expression
+     * @param "UNION"|"EXCEPT"|"INTERSECT" $type     Whether to construct UNION, EXCEPT or INTERSECT
+     * @param "ALL"|"DISTINCT"|null        $operator Whether to add ALL, DISTINCT or default
      *
      * @return void
      */
-    protected function sql_compound($sqlQuery, $type, $operator = NULL): void
+    protected function sql_compound(string $sqlQuery, string $type, ?string $operator = NULL): void
     {
         if ($this->compound != '')
         {
@@ -838,7 +846,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @return void
      */
-    protected function sql_order_by($expr, $asc = TRUE): void
+    protected function sql_order_by(string $expr, bool $asc = TRUE): void
     {
         $direction = ($asc === TRUE) ? 'ASC' : 'DESC';
 
@@ -862,7 +870,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @return void
      */
-    protected function sql_limit($amount, $offset = -1): void
+    protected function sql_limit(int $amount, int $offset = -1): void
     {
         $this->limit = "LIMIT $amount";
 
@@ -881,7 +889,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @return void
      */
-    protected function sql_connector($connector): void
+    protected function sql_connector(string $connector): void
     {
         $this->connector = $connector;
     }
@@ -893,7 +901,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @return void
      */
-    protected function sql_group_by($expr): void
+    protected function sql_group_by(string $expr): void
     {
         if ($this->groupBy == '')
         {
@@ -912,9 +920,9 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @param array $components Array of SQL query components to use to construct the query.
      *
-     * @return string $sql The constructed SQL query
+     * @return string The constructed SQL query
      */
-    protected function implode_query($components): string
+    protected function implode_query(array $components): string
     {
         $sql = '';
 
@@ -949,7 +957,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @param array|null $indexHints Array of Index Hints
      *
-     * @return string $hints Comma separated list of index hints.
+     * @return string Comma separated list of index hints.
      */
     protected function prepare_index_hints(?array $indexHints): string
     {
@@ -969,11 +977,11 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Open the parentheses for the sql condition.
      *
-     * @param string $base String indication Statement to group
+     * @param "WHERE"|"HAVING"|"ON" $base String indication Statement to group
      *
      * @return void
      */
-    protected function sql_group_start($base = 'WHERE'): void
+    protected function sql_group_start(string $base = 'WHERE'): void
     {
         $condition = ($base === 'ON') ? 'join' : strtolower($base);
 
@@ -1014,7 +1022,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Close the parentheses for the sql condition.
      *
-     * @param string $condition String indication Statement to group
+     * @param "WHERE"|"HAVING"|"ON" $condition String indication Statement to group
      *
      * @return void
      */
