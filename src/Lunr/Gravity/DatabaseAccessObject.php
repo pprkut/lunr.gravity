@@ -147,7 +147,7 @@ abstract class DatabaseAccessObject
 
         foreach ($query->result_array() as $row)
         {
-            $result[$row[$column]] = $row;
+            $result[(string) $row[$column]] = $row;
         }
 
         return $result;

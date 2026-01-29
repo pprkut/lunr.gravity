@@ -112,7 +112,11 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTestCase
             ],
             [
                 'key'  => 'value2',
-                'key2' => 'index2',
+                'key2' => 123,
+            ],
+            [
+                'key'  => 'value3',
+                'key2' => 123.4,
             ],
         ];
 
@@ -129,14 +133,18 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTestCase
                 'key'  => 'value',
                 'key2' => 'index',
             ],
-            'index2' => [
+            '123' => [
                 'key'  => 'value2',
-                'key2' => 'index2',
+                'key2' => 123,
+            ],
+            '123.4' => [
+                'key'  => 'value3',
+                'key2' => 123.4,
             ],
         ];
 
         $this->assertIsArray($result);
-        $this->assertEquals($indexedResult, $result);
+        $this->assertSame($indexedResult, $result);
     }
 
     /**
