@@ -484,7 +484,7 @@ class MySQLConnection extends DatabaseConnection
                 'digest'       => sha1($fields['canonicalQuery']),
                 'databaseHost' => $this->getHost(),
                 'successful'   => !$queryResult->has_failed(),
-                'errorNumber'  => $queryResult->error_number(),
+                'errorNumber'  => (string) $queryResult->error_number(),
             ];
 
             if ($this->analyticsDetailLevel->atLeast(AnalyticsDetailLevel::Full))
